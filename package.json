@@ -1,0 +1,15 @@
+{
+  "name": "automacao-web-pgats",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Igor Cordeiro",
+  "license": "ISC",
+  "description": "Projeto da disciplina de Automação Web a PGATS",
+  "devDependencies": {
+    "cypress": "^13.7.3"
+  }
+}
