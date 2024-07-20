@@ -1,10 +1,17 @@
 /// <reference types="cypress" />
 
 import cadastro from '../../pages/cadastro';
+import login from '../../pages/login';
+import menu from '../../pages/menu';
 
 import { faker } from '@faker-js/faker' 
 
 describe('Automation Exercise', () => {
+
+  beforeEach(() => {
+    cy.visit('https://automationexercise.com');
+  })
+
   it.only('Test Case 1: Cadastrar um usuário', () => {
     
     cadastro.preencherFormulario();
@@ -16,15 +23,11 @@ describe('Automation Exercise', () => {
     // Triplo A - Arrange, Act, Assert
 
     // arrange - preparacao
-    cy.visit('https://automationexercise.com');
+    
+    menu.irParaCadastro();
 
-    cy.contains('Signup').click()
-
-    // act - acao principal
-    cy.get('[data-qa="login-email"]').type('tester-1721346302730@mail.com')
-    cy.get('[data-qa="login-password"]').type('12345', { log: false })
-
-    cy.get('[data-qa="login-button"]').click()
+    
+    login.preencherLogin('tester-1721346302730@mail.com', '12345');
 
     // assert - verificacao da saída do teste / comportamento esperado
 
@@ -36,15 +39,11 @@ describe('Automation Exercise', () => {
     // Triplo A - Arrange, Act, Assert
 
     // arrange - preparacao
-    cy.visit('https://automationexercise.com');
 
-    cy.contains('Signup').click()
+    menu.irParaCadastro();
 
     // act - acao principal
-    cy.get('[data-qa="login-email"]').type('tester-1721346302730@mail.com')
-    cy.get('[data-qa="login-password"]').type('54321')
-
-    cy.get('[data-qa="login-button"]').click()
+    login.preencherLogin('tester-1721346302730@mail.com', '54321');
 
     // assert - verificacao da saída do teste / comportamento esperado
 
@@ -56,13 +55,13 @@ describe('Automation Exercise', () => {
     // Triplo A - Arrange, Act, Assert
 
     // arrange - preparacao
-    cy.visit('https://automationexercise.com');
 
-    cy.contains('Signup').click()
-    cy.get('[data-qa="login-email"]').type('tester-1721346302730@mail.com')
-    cy.get('[data-qa="login-password"]').type('12345', { log: false })
+    // cy.contains('Signup').click()
+    // menu.irParaCadastro();
+    menu.irPara(menu.menus.CADASTRO);
 
-    cy.get('[data-qa="login-button"]').click()
+    login.preencherLogin('tester-1721346302730@mail.com', '12345');
+
     cy.get('i.fa-user').parent().should('contain', 'Tester QA')
 
     // act - acao principal
@@ -75,8 +74,8 @@ describe('Automation Exercise', () => {
   });
 
   it('Test Case 5: Register User with existing email', () => {
-    cy.visit('https://automationexercise.com');
-    cy.contains('Signup').click()
+    // cy.contains('Signup').click()
+    menu.irParaCadastro();
 
     cy.get('[data-qa="signup-name"]').type(`Tester QA`)
     cy.get('[data-qa="signup-email"]').type(`tester-1721346302730@mail.com`)
@@ -89,8 +88,8 @@ describe('Automation Exercise', () => {
   });
 
   it('Test Case 6: Contact Us Form', () => {
-    cy.visit('https://automationexercise.com')
-    cy.contains(`Contact us`).click()
+    // cy.contains(`Contact us`).click()
+    menu.irParaEntreEmContato();
 
     cy.get(`.contact-form h2`)
       .should('be.visible')
@@ -110,8 +109,8 @@ describe('Automation Exercise', () => {
   });
 
   it('Test Case 8: Verify All Products and product detail page', () => {
-    cy.visit('https://automationexercise.com')
-    cy.contains(`Products`).click()
+    // cy.contains(`Products`).click()
+    menu.irParaProdutos();
 
     cy.url().should('contain', 'products')
     cy.get('.title').should('be.visible').and('contain', 'All Products')
@@ -133,8 +132,8 @@ describe('Automation Exercise', () => {
   });
 
   it('Test Case 9: Search Product', () => {
-    cy.visit('https://automationexercise.com')
-    cy.contains(`Products`).click()
+    // cy.contains(`Products`).click()
+    menu.irParaProdutos();
 
     cy.url().should('contain', 'products')
     cy.get('.title').should('be.visible').and('contain', 'All Products')
@@ -151,8 +150,6 @@ describe('Automation Exercise', () => {
   });
 
   it('Test Case 10: Verify Subscription in home page', () => {
-    cy.visit('https://automationexercise.com')
-
     cy.get('input#susbscribe_email')
       .scrollIntoView()
       .type('tester-qa@mail.com')
@@ -167,7 +164,6 @@ describe('Automation Exercise', () => {
     const timestamp = new Date().getTime()
     const nome = "Iron Man"
 
-    cy.visit('https://automationexercise.com')
     cy.get('[href$=login]').click()
     cy.get('[data-qa="signup-name"]').type(nome)
     cy.get('[data-qa=signup-email]').type(`ironman${timestamp}@qa.com.br`)

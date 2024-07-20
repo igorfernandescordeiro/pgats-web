@@ -5,8 +5,6 @@ class Cadastro {
 
         Cypress.env('signUpName', signUpName);
 
-    cy.visit('https://automationexercise.com')
-
     //    cy.get('a[href$=login]').click()  // alternativa 1
     cy.contains('Signup').click()     // alternativa 2
 
@@ -50,7 +48,9 @@ class Cadastro {
     cy.get('[data-qa="account-created"]').should('be.visible')
 
     cy.get('[data-qa="continue-button"]').click()
+    return this;
     }
+    
 };
 
 export default new Cadastro()
