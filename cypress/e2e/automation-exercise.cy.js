@@ -2,49 +2,96 @@
 // com esse reference types ele tras todas as sugestoes do cy.
 
 describe('Automation exercise', () => {
-    it('Test Case 1: Cadastrar um usuário', () => {
-        const timestamp = new Date().getTime();
-        const signUpName = 'Tester01 QA';
+  it('Test Case 1: Cadastrar um usuário', () => {
+    const timestamp = new Date().getTime();
+    const signUpName = 'Tester01 QA';
 
-        cy.visit('https://automationexercise.com/');
-        cy.get('a[href$=login]').click();
-        // cy.contains('Signup').click();
-       cy.get('[data-qa="signup-name"]').type(signUpName);
-       cy.get('[data-qa="signup-email"]').type(`teste${timestamp}qa@email.com`);
-       cy.contains('button', 'Signup').click();
+    cy.visit('https://automationexercise.com/');
+    cy.get('a[href$=login]').click();
+    // cy.contains('Signup').click();
+    cy.get('[data-qa="signup-name"]').type(signUpName);
+    cy.get('[data-qa="signup-email"]').type(`teste${timestamp}qa@email.com`);
+    cy.contains('button', 'Signup').click();
 
-       cy.get('input[type=radio]').check('Mrs');
-       cy.get('[data-qa="password"]').type('123456', {log: false});
-       cy.get('[data-qa="days"]').select('14');
-       cy.get('[data-qa="months"]').select('May');
-       cy.get('[data-qa="years"]').select('1990');
+    cy.get('input[type=radio]').check('Mrs');
+    cy.get('[data-qa="password"]').type('123456', { log: false });
+    cy.get('[data-qa="days"]').select('14');
+    cy.get('[data-qa="months"]').select('May');
+    cy.get('[data-qa="years"]').select('1990');
 
-       cy.get('input[type=checkbox]#newsletter').check();
-       cy.get('input[type=checkbox]#optin').check();
+    cy.get('input[type=checkbox]#newsletter').check();
+    cy.get('input[type=checkbox]#optin').check();
 
-       cy.get('[data-qa="first_name"]').type('Aaaaaa');
-       cy.get('[data-qa="last_name"]').type('bbbbbb');
-       cy.get('[data-qa="company"]').type('CR7');
-       cy.get('[data-qa="address"]').type('AV DOM');
-       cy.get('[data-qa="address2"]').type('Num 1000');
-       cy.get('[data-qa="country"]').select('Canada');
-       cy.get('[data-qa="state"]').type('Do Canada');
-       cy.get('[data-qa="city"]').type('toronto');
-       cy.get('[data-qa="zipcode"]').type('010101');
-       cy.get('[data-qa="mobile_number"]').type('123123');
+    cy.get('[data-qa="first_name"]').type('Aaaaaa');
+    cy.get('[data-qa="last_name"]').type('bbbbbb');
+    cy.get('[data-qa="company"]').type('CR7');
+    cy.get('[data-qa="address"]').type('AV DOM');
+    cy.get('[data-qa="address2"]').type('Num 1000');
+    cy.get('[data-qa="country"]').select('Canada');
+    cy.get('[data-qa="state"]').type('Do Canada');
+    cy.get('[data-qa="city"]').type('toronto');
+    cy.get('[data-qa="zipcode"]').type('010101');
+    cy.get('[data-qa="mobile_number"]').type('123123');
 
-       cy.get('[data-qa="create-account"]').click();
+    cy.get('[data-qa="create-account"]').click();
 
 
-        // Asserts
-       cy.url().should('includes', 'account_created');
-       cy.get('[data-qa="account-created"]').should('be.visible');
+    // Asserts
+    cy.url().should('includes', 'account_created');
+    cy.get('[data-qa="account-created"]').should('be.visible');
 
-       cy.get('[data-qa="continue-button"]').click();
+    cy.get('[data-qa="continue-button"]').click();
 
-       cy.contains(`Logged in as ${signUpName}`);
+    cy.contains(`Logged in as ${signUpName}`);
 
-    });
+  });
+
+  it('Test Case 2: Login User with correct email and password', () => {
+    const timestamp = new Date().getTime();
+    const signUpName = 'Tester01 QA';
+
+    cy.visit('https://automationexercise.com/');
+    cy.get('a[href$=login]').click();
+    // cy.contains('Signup').click();
+    cy.get('[data-qa="signup-name"]').type(signUpName);
+    cy.get('[data-qa="signup-email"]').type(`teste${timestamp}qa@email.com`);
+    cy.contains('button', 'Signup').click();
+
+    cy.get('input[type=radio]').check('Mrs');
+    cy.get('[data-qa="password"]').type('123456', { log: false });
+    cy.get('[data-qa="days"]').select('14');
+    cy.get('[data-qa="months"]').select('May');
+    cy.get('[data-qa="years"]').select('1990');
+
+    cy.get('input[type=checkbox]#newsletter').check();
+    cy.get('input[type=checkbox]#optin').check();
+
+    cy.get('[data-qa="first_name"]').type('Aaaaaa');
+    cy.get('[data-qa="last_name"]').type('bbbbbb');
+    cy.get('[data-qa="company"]').type('CR7');
+    cy.get('[data-qa="address"]').type('AV DOM');
+    cy.get('[data-qa="address2"]').type('Num 1000');
+    cy.get('[data-qa="country"]').select('Canada');
+    cy.get('[data-qa="state"]').type('Do Canada');
+    cy.get('[data-qa="city"]').type('toronto');
+    cy.get('[data-qa="zipcode"]').type('010101');
+    cy.get('[data-qa="mobile_number"]').type('123123');
+
+    cy.get('[data-qa="create-account"]').click();
+
+
+    // Asserts
+    cy.url().should('includes', 'account_created');
+    cy.get('[data-qa="account-created"]').should('be.visible');
+
+    cy.get('[data-qa="continue-button"]').click();
+
+    cy.contains(`Logged in as ${signUpName}`);
+
+  });
+
+
+
 });
 
 /* 
